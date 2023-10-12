@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
+import { AuthGoogleModule } from './auth-google/infra/auth-google.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { AppController } from './app.controller';
       entities: ['dist/**/*.entity.js'],
       synchronize: true,
     }),
+    AuthGoogleModule,
   ],
   controllers: [AppController],
   providers: [AppService],
