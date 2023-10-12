@@ -27,7 +27,7 @@ export class UserRepository implements IUserRepository<UserEntity> {
     return this.entityRepository.save(entity);
   }
 
-  public findByEmail(email: string): Promise<UserEntity | Partial<UserEntity>> {
+  public findByEmail(email: string): Promise<UserEntity> {
     return this.entityRepository.findOne({
       where: { email: Equal(email.toLowerCase()) },
     });

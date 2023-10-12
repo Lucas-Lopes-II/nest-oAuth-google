@@ -5,7 +5,10 @@ import { DataSource } from 'typeorm';
 import { UserEntity } from './entities/user.entity';
 import { UsersController } from './users.controller';
 import { IUserRepository, UserRepository } from '../application/repositories';
-import { CreateUserUseCase } from '../application/usecases';
+import {
+  CreateUserUseCase,
+  FindUserByIdUseCase,
+} from '../application/usecases';
 import { IEnvConfig } from 'src/shared/infra/env-config';
 
 @Module({
@@ -31,7 +34,18 @@ import { IEnvConfig } from 'src/shared/infra/env-config';
       },
       inject: [IUserRepository, IEnvConfig],
     },
+    {
+      provide: FindUserByIdUseCase.UseCase,
+      useFactory: (userRepository: IUserRepository<UserEntity>) => {
+        return new FindUserByIdUseCase.UseCase(userRepository);
+      },
+      inject: [IUserRepository],
+    },
   ],
-  exports: [IUserRepository, CreateUserUseCase.UseCase],
+  exports: [
+    IUserRepository,
+    CreateUserUseCase.UseCase,
+    FindUserByIdUseCase.UseCase,
+  ],
 })
 export class UsersModule {}
