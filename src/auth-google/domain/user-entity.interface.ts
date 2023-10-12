@@ -1,4 +1,5 @@
-export interface UserEntity {
+export interface IUserEntity {
+  id: string;
   name: string;
   email: string;
 }
