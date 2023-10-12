@@ -7,7 +7,7 @@ import { UsersController } from './users.controller';
 import { IUserRepository, UserRepository } from '../application/repositories';
 import {
   CreateUserUseCase,
-  FindUserByIdUseCase,
+  FindUserByEmailUseCase,
 } from '../application/usecases';
 import { IEnvConfig } from 'src/shared/infra/env-config';
 
@@ -35,9 +35,9 @@ import { IEnvConfig } from 'src/shared/infra/env-config';
       inject: [IUserRepository, IEnvConfig],
     },
     {
-      provide: FindUserByIdUseCase.UseCase,
+      provide: FindUserByEmailUseCase.UseCase,
       useFactory: (userRepository: IUserRepository<UserEntity>) => {
-        return new FindUserByIdUseCase.UseCase(userRepository);
+        return new FindUserByEmailUseCase.UseCase(userRepository);
       },
       inject: [IUserRepository],
     },
@@ -45,7 +45,7 @@ import { IEnvConfig } from 'src/shared/infra/env-config';
   exports: [
     IUserRepository,
     CreateUserUseCase.UseCase,
-    FindUserByIdUseCase.UseCase,
+    FindUserByEmailUseCase.UseCase,
   ],
 })
 export class UsersModule {}

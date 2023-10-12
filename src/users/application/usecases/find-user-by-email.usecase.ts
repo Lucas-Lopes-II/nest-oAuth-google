@@ -2,7 +2,7 @@ import { UserEntity } from './../../infra/entities/user.entity';
 import { DefaultUseCase } from './../../../shared/application/usecases';
 import { IUserRepository } from '../repositories';
 
-export namespace FindUserByIdUseCase {
+export namespace FindUserByEmailUseCase {
   export type Input = {
     email: string;
   };
