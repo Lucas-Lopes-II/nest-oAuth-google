@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule, getDataSourceToken } from '@nestjs/typeorm';
 
 import { DataSource } from 'typeorm';
-import { UsersController } from './users.controller';
 import { UserEntity } from './entities/user.entity';
+import { UsersController } from './users.controller';
 import { IUserRepository, UserRepository } from '../application/repositories';
 
 @Module({
