@@ -32,4 +32,12 @@ export class UserRepository implements IUserRepository<UserEntity> {
       where: { email: Equal(email.toLowerCase()) },
     });
   }
+
+  public async emailExists(email: string): Promise<boolean> {
+    const entity = await this.entityRepository.findOne({
+      where: { email: Equal(email.toLowerCase()) },
+    });
+
+    return !!entity;
+  }
 }

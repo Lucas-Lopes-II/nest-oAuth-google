@@ -1,10 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { AppService } from './app.service';
-import { AppController } from './app.controller';
-import { AuthGoogleModule } from './auth-google/infra/auth-google.module';
 import { UsersModule } from './users/infra/users.module';
+import { AuthGoogleModule } from './auth-google/infra/auth-google.module';
 
 @Module({
   imports: [
@@ -17,7 +15,5 @@ import { UsersModule } from './users/infra/users.module';
     AuthGoogleModule,
     UsersModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

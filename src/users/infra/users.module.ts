@@ -5,6 +5,8 @@ import { DataSource } from 'typeorm';
 import { UserEntity } from './entities/user.entity';
 import { UsersController } from './users.controller';
 import { IUserRepository, UserRepository } from '../application/repositories';
+import { CreateUserUseCase } from '../application/usecases';
+import { IEnvConfig } from 'src/shared/infra/env-config';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity])],
@@ -19,7 +21,17 @@ import { IUserRepository, UserRepository } from '../application/repositories';
       },
       inject: [getDataSourceToken()],
     },
+    {
+      provide: CreateUserUseCase.UseCase,
+      useFactory: (
+        userRepository: IUserRepository<UserEntity>,
+        envConfig: IEnvConfig,
+      ) => {
+        return new CreateUserUseCase.UseCase(userRepository, envConfig);
+      },
+      inject: [IUserRepository, IEnvConfig],
+    },
   ],
-  exports: [IUserRepository],
+  exports: [IUserRepository, CreateUserUseCase.UseCase],
 })
 export class UsersModule {}
